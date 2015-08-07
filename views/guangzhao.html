@@ -1,0 +1,281 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>智能家居控制系统SmartHome</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="SmartHome"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="/stylesheets/amazeui.min.css"/>
+  <link rel="stylesheet" href="/stylesheets/admin.css">
+  <style>
+.am-header{
+
+  opacity: 0;
+  padding: 5px;
+}
+.am-icon-arrow-left{
+  opacity: 1;
+  z-index: 4;
+}
+
+
+
+
+body {
+  background-color: white;
+  text-align: center;
+  position: relative;
+}
+
+.sunshine {
+  margin: 10%;
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  background-color: white;
+}
+.sunshine:nth-child(1) {
+  -webkit-animation: shine 3s infinite;
+}
+.sunshine:nth-child(2) {
+  -webkit-animation: shine 4s infinite;
+}
+.sunshine:nth-child(3) {
+  z-index: 5;
+  -webkit-animation: shine 6s infinite;
+}
+.sunshine:nth-child(4) {
+  z-index: 4;
+  -webkit-animation: shine 5s infinite;
+}
+.sunshine:nth-child(5) {
+  z-index: 6;
+  -webkit-animation: shine 7s infinite;
+}
+.sunshine:nth-child(6) {
+  -webkit-animation: shine 3s infinite;
+}
+
+@-webkit-keyframes shine {
+  10% {
+    box-shadow: 0 0 0 50px rgba(255, 251, 209, 0.1);
+  }
+  20% {
+    box-shadow: 0 0 0 50px rgba(255, 251, 209, 0.1), 0 0 0 100px rgba(253, 241, 79, 0.2);
+  }
+  30% {
+    box-shadow: 0 0 0 50px rgba(255, 251, 209, 0.1), 0 0 0 100px rgba(253, 241, 79, 0.2), 0 0 0 150px rgba(255, 221, 72, 0.3);
+  }
+  40% {
+    box-shadow: 0 0 0 50px rgba(255, 251, 209, 0.1), 0 0 0 100px rgba(253, 241, 79, 0.2), 0 0 0 150px rgba(255, 221, 72, 0.3), 0 0 0 200px rgba(255, 201, 67, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 50px rgba(255, 251, 209, 0.1), 0 0 0 100px rgba(253, 241, 79, 0.2), 0 0 0 150px rgba(255, 221, 72, 0.3), 0 0 0 200px rgba(255, 201, 67, 0.4), 0 0 0 250px rgba(255, 183, 64, 0.5);
+  }
+  60% {
+    box-shadow: 0 0 0 50px rgba(255, 251, 209, 0.1), 0 0 0 100px rgba(253, 241, 79, 0.2), 0 0 0 150px rgba(255, 221, 72, 0.3), 0 0 0 200px rgba(255, 201, 67, 0.4), 0 0 0 250px rgba(255, 183, 64, 0.5), 0 0 0 300px rgba(251, 147, 58, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 50px rgba(255, 251, 209, 0.1), 0 0 0 100px rgba(253, 241, 79, 0.2), 0 0 0 150px rgba(255, 221, 72, 0.3), 0 0 0 200px rgba(255, 201, 67, 0.4), 0 0 0 250px rgba(255, 183, 64, 0.5), 0 0 0 300px rgba(251, 147, 58, 0.6), 0 0 0 350px rgba(250, 128, 55, 0.7);
+  }
+  80% {
+    box-shadow: 0 0 0 50px rgba(255, 251, 209, 0.1), 0 0 0 100px rgba(253, 241, 79, 0.2), 0 0 0 150px rgba(255, 221, 72, 0.3), 0 0 0 200px rgba(255, 201, 67, 0.4), 0 0 0 250px rgba(255, 183, 64, 0.5), 0 0 0 300px rgba(251, 147, 58, 0.6), 0 0 0 350px rgba(250, 128, 55, 0.7), 0 0 0 400px rgba(247, 86, 48, 0.8);
+  }
+  90% {
+    box-shadow: 0 0 0 50px rgba(255, 251, 209, 0.1), 0 0 0 100px rgba(253, 241, 79, 0.2), 0 0 0 150px rgba(255, 221, 72, 0.3), 0 0 0 200px rgba(255, 201, 67, 0.4), 0 0 0 250px rgba(255, 183, 64, 0.5), 0 0 0 300px rgba(251, 147, 58, 0.6), 0 0 0 350px rgba(250, 128, 55, 0.7), 0 0 0 400px rgba(247, 86, 48, 0.8), 0 0 0 450px rgba(245, 61, 45, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0 50px rgba(255, 251, 209, 0.1), 0 0 0 100px rgba(253, 241, 79, 0.2), 0 0 0 150px rgba(255, 221, 72, 0.3), 0 0 0 200px rgba(255, 201, 67, 0.4), 0 0 0 250px rgba(255, 183, 64, 0.5), 0 0 0 300px rgba(251, 147, 58, 0.6), 0 0 0 350px rgba(250, 128, 55, 0.7), 0 0 0 400px rgba(247, 86, 48, 0.8), 0 0 0 450px rgba(245, 61, 45, 0.9), 0 0 0 500px #F3132B;
+  }
+}
+
+
+
+#main{
+  z-index: 3;
+  float:right;
+}
+
+</style>
+</head>
+<body>
+
+<header data-am-widget="header" class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+      <a href="/home" class="am-header-icon  am-icon-arrow-left"></a>
+    </div>
+</header>
+
+
+
+        <div class="sunshine"></div>
+        <div class="sunshine"></div>
+        <div class="sunshine"></div>
+        <div class="sunshine"></div>
+        <div class="sunshine"></div>
+        <div class="sunshine"></div>
+
+
+
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:400px "></div>
+
+
+
+
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
+id="">
+  <ul class="am-navbar-nav am-cf am-avg-sm-4">
+    <li>
+      <a href="/home" class="">
+        <span class="am-icon-home"></span>
+        <span class="am-navbar-label">主页</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/record" class="">
+        <span class="am-icon-signal"></span>
+        <span class="am-navbar-label">记录</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/setting" class="">
+        <span class="am-icon-gear"></span>
+        <span class="am-navbar-label">设置</span>
+      </a>
+    </li>
+
+
+  </ul>
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="javascripts/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="/javascripts/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="/javascripts/amazeui.min.js"></script>
+<!-- ECharts单文件引入 -->
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+
+<script type="text/javascript">
+// 路径配置
+require.config({
+    paths: {
+        echarts: 'http://echarts.baidu.com/build/dist'
+            }
+      });
+// 使用
+require(
+      [
+    'echarts',
+    'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+      ],
+function (ec) {
+// 基于准备好的dom，初始化echarts图表
+var myChart = ec.init(document.getElementById('main'));
+var option = {
+        title : {
+        text: '温湿度情况',
+        subtext: '最近一周'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['温度','湿度']
+    },
+    toolbox: {
+        show : true
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            data : ['1月','2月','3月','4月','5月','6月','7月']
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'温度',
+            type:'bar',
+            data:[23, 24, 30, 33, 25, 26.5, 30.6],
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        },
+        {
+            name:'湿度',
+            type:'bar',
+            data:[43, 59, 90, 26, 28, 70, 76],
+            // markPoint : {
+            //     data : [
+            //         {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
+            //         {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+            //     ]
+            // },
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name : '平均值'}
+                ]
+            }
+        }
+    ]
+};
+
+                // 为echarts对象加载数据
+                myChart.setOption(option);
+            }
+        );
+    </script>
+<!--
+<script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script> -->
+<script type="text/javascript" src="javascripts/openlink.js"></script>
+<script>
+$(function(){
+  // var username = {};
+
+);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>智能家居控制系统SmartHome</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="SmartHome"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="/stylesheets/amazeui.min.css"/>
+  <link rel="stylesheet" href="/stylesheets/admin.css">
+  <style>
+.am-header{
+  background-color:#0093d9;
+  padding: 5px;
+}
+
+
+body {
+  background: #0093d9;
+}
+
+.inspired {
+  text-align: center;
+  color: #fff;
+  font-family: arial;
+  font-weight: 200;
+}
+.inspired p{
+  font-size: 20px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.inspired h1{
+  font-size: 60px;
+  padding: 5px;
+  margin: 0px;
+}
+.container {
+  margin: 10% auto 10px;
+  width: 60px;
+  height: 36px;
+  position: relative;
+}
+
+.sun {
+  height: 20px;
+  width: 20px;
+  background: #fcd000;
+  border-radius: 55%;
+  position: absolute;
+  right: 0px;
+  top: -7px;
+  -webkit-animation: rotate-rays 5s infinite;
+  -webkit-animation-timing-function: linear;
+  z-index: 1;
+}
+
+.rays {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.rays > li {
+  width: 28px;
+  height: 4px;
+  display: block;
+  position: absolute;
+  left: -4px;
+  top: 8px;
+}
+.rays > li div {
+  height: 2px;
+  width: 2px;
+  background: #fcd000;
+  border-radius: 50%;
+  float: right;
+}
+.rays > li div:first-child {
+  float: left;
+}
+.rays > li:nth-child(1) {
+  -webkit-transform: rotate(30deg);
+}
+.rays > li:nth-child(2) {
+  -webkit-transform: rotate(60deg);
+}
+.rays > li:nth-child(3) {
+  -webkit-transform: rotate(90deg);
+}
+.rays > li:nth-child(4) {
+  -webkit-transform: rotate(120deg);
+}
+.rays > li:nth-child(5) {
+  -webkit-transform: rotate(150deg);
+}
+.rays > li:nth-child(6) {
+  -webkit-transform: rotate(180deg);
+}
+
+.cloud {
+  height: 36px;
+  width: 58px;
+  position: relative;
+  z-index: 0;
+}
+.cloud .base {
+  height: 20px;
+  width: 38px;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  background: #00acf2;
+}
+.cloud .bubble {
+  position: absolute;
+  background: #00acf2;
+  height: 24px;
+  width: 24px;
+  border-radius: 55%;
+}
+.cloud .bubble:nth-child(1) {
+  left: 0;
+  bottom: 0;
+}
+.cloud .bubble:nth-child(2) {
+  left: 12px;
+  top: 0px;
+  width: 28px;
+  height: 28px;
+}
+.cloud .bubble:nth-child(3) {
+  right: 4px;
+  top: 10px;
+}
+.cloud .bubble:nth-child(4) {
+  right: 0px;
+  bottom: 0px;
+  height: 16px;
+  width: 16px;
+}
+
+@-webkit-keyframes rotate-rays {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+</style>
+</head>
+<body>
+
+<header data-am-widget="header" class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+      <a href="/home" class="am-header-icon  am-icon-arrow-left"></a>
+    </div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="sun">
+    <ul class="rays">
+      <li><div></div><div></div></li>
+      <li><div></div><div></div></li>
+      <li><div></div><div></div></li>
+      <li><div></div><div></div></li>
+      <li><div></div><div></div></li>
+      <li><div></div><div></div></li></ul>
+  </div>
+    <div class="cloud">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="base">
+        </div></div></div>
+      <div class="inspired">
+        <p>温度</p>
+        <h1>23  &#8451</h1>
+      </div>
+      <!-- <sup>2</sup> -->
+
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:400px"></div>
+
+
+
+
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
+id="">
+  <ul class="am-navbar-nav am-cf am-avg-sm-4">
+    <li>
+      <a href="/home" class="">
+        <span class="am-icon-home"></span>
+        <span class="am-navbar-label">主页</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/record" class="">
+        <span class="am-icon-signal"></span>
+        <span class="am-navbar-label">记录</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/setting" class="">
+        <span class="am-icon-gear"></span>
+        <span class="am-navbar-label">设置</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="javascripts/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="/javascripts/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="/javascripts/amazeui.min.js"></script>
+<!-- ECharts单文件引入 -->
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+
+<script type="text/javascript">
+// 路径配置
+require.config({
+    paths: {
+        echarts: 'http://echarts.baidu.com/build/dist'
+            }
+      });
+// 使用
+require(
+      [
+    'echarts',
+    'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+      ],
+function (ec) {
+// 基于准备好的dom，初始化echarts图表
+var myChart = ec.init(document.getElementById('main'));
+var option = {
+        title : {
+        // text: '温湿度情况',
+        subtext: '最近一周'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['温度','湿度']
+    },
+    toolbox: {
+        show : true
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            data : ['1号','2号','3号','4号','5号','6号','7号']
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'温度',
+            type:'bar',
+            data:[23, 24, 30, 33, 25, 26.5, 30.6],
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        },
+        {
+            name:'湿度',
+            type:'bar',
+            data:[43, 59, 90, 26, 28, 70, 76],
+            // markPoint : {
+            //     data : [
+            //         {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
+            //         {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+            //     ]
+            // },
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name : '平均值'}
+                ]
+            }
+        }
+    ]
+};
+
+                // 为echarts对象加载数据
+                myChart.setOption(option);
+            }
+        );
+    </script>
+<!--
+<script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script> -->
+<script type="text/javascript" src="javascripts/openlink.js"></script>
+<script>
+$(function(){
+  // var username = {};
+
+);
+</script>
+
+</body>
+</html>

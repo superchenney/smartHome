@@ -1,0 +1,446 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>智能家居控制系统SmartHome</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="SmartHome"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="/stylesheets/amazeui.min.css"/>
+  <link rel="stylesheet" href="/stylesheets/admin.css">
+  <style>
+
+.am-header{
+  background-color: #3AB4F3;
+  padding: 5px;
+}
+
+.boxControl {
+  border:1px solid #eee;
+  margin: 0px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  line-height:25px;
+  text-align: center;
+}
+
+.boxControl :hover , .am-header-nav :hover , .feature-item :hover{
+  opacity: 0.5;
+}
+.boxControl a span {
+    display: block;
+}
+
+.boxControl a span:nth-child(2){
+    color: #666666;
+/*    margin: 3px;*/
+    padding: 5px;
+
+}
+
+.feature{
+  width: 100%;
+  height: 80px;
+  background-color: #3AB4F3;
+  color: #ffffff;
+  line-height: 20px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.feature-item{
+  margin: 0px;
+  padding: 10px;
+/*  font-weight: bold;*/
+}
+
+
+.feature-item a span{
+  display: block;
+  color: #fff;
+}
+
+.instructions{
+  padding: 70px 0;
+  text-align: center;
+/*  background-color: #3AB4F4;*/
+  height: auto;
+}
+
+/*开窗*/
+.am-icon-square-o{
+  color: #5EB95E;
+}
+
+/*关窗*/
+.am-icon-square{
+  color: #555555;
+}
+
+/*开灯*/
+.am-icon-lightbulb-o{
+  color: #F37B1D;
+}
+
+/*关灯*/
+.am-icon-power-off{
+  color:#DD514C;
+}
+
+/*温湿度*/
+.am-icon-tint{
+
+}
+
+/*光照*/
+.am-icon-sun-o{
+  color: #FED143;
+}
+
+
+/*更多*/
+.am-icon-plus{
+}
+
+/*.am-offcanvas-bar{
+  background-color:#999999;
+}*/
+
+</style>
+</head>
+<body>
+
+<header data-am-widget="header" class="am-header am-header-default">
+    <div class="am-header-left am-header-nav" data-am-offcanvas="{target: '#doc-oc-demo2', effect: 'push'}">
+      <a href="#left-link" class="am-header-icon  am-icon-user"></a>
+    </div>
+    <h1 class="am-header-title">
+      <a href="/home" class="">SmartHome</a>
+    </h1>
+    <div class="am-header-right am-header-nav">
+      <a href="/logout" class="am-header-icon am-icon-sign-out"></a>
+    </div>
+</header>
+
+
+<!-- 侧边栏内容 -->
+<div id="doc-oc-demo2" class="am-offcanvas">
+  <div class="am-offcanvas-bar">
+    <div class="am-offcanvas-content">
+      <ul class="am-nav">
+        <li class="am-btn">Hi,<%= username %></li>
+        <li class="am-badge am-text-lg am-badge-primary"><a href="#">开始使用</a></li>
+        <li class="am-badge am-text-lg am-badge-primary"><a href="#">技术支持</a></li>
+        <li class="am-badge am-text-lg am-badge-primary"><a href="#">团队介绍</a></li>
+        <li class="am-badge am-text-lg am-badge-danger"><a href="/logout">退出登录</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="feature" data-am-sticky>
+  <ul class="am-avg-sm-3">
+    <li class="feature-item" id="anfang">
+      <a href="">
+      <span class="am-icon-lg am-icon-shield"></span>
+      <span class="am-navbar-label">安防</span>
+      </a>
+    </li>
+
+    <li class="feature-item" id="shenghuo">
+      <a href="">
+      <span class="am-icon-lg am-icon-bullseye"></span>
+      <span class="am-navbar-label">生活</span>
+      </a>
+    </li>
+
+    <li class="feature-item" id="xiuxi">
+      <a href="">
+      <span class="am-icon-lg am-icon-moon-o"></span>
+      <span class="am-navbar-label">休息</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+<ul class="am-avg-sm-3">
+
+  <li class="boxControl" id="kaichuang">
+    <a href="">
+      <span class="am-icon-lg am-icon-square-o"></span>
+      <span class="am-navbar-label">开窗</span>
+    </a>
+  </li>
+
+  <li class="boxControl" id="guanchuang">
+    <a href="">
+      <span class="am-icon-lg am-icon-square"></span>
+      <span class="am-navbar-label">关窗</span>
+    </a>
+  </li>
+
+  <li class="boxControl" id="kaideng">
+    <a href="">
+      <span class="am-icon-lg am-icon-lightbulb-o"></span>
+      <span class="am-navbar-label">开灯</span>
+    </a>
+  </li>
+
+  <li class="boxControl" id="guandeng">
+    <a href="">
+      <span class="am-icon-lg am-icon-power-off"></span>
+      <span class="am-navbar-label">关灯</span>
+    </a>
+  </li>
+
+  <li class="boxControl" id="wenshidu">
+    <a href="/wenshidu">
+      <span class="am-icon-lg am-icon-tint"></span>
+      <span class="am-navbar-label">温湿度</span>
+    </a>
+  </li>
+
+  <li class="boxControl" id="guangzhao">
+    <a href="/guangzhao">
+      <span class="am-icon-lg am-icon-sun-o"></span>
+      <span class="am-navbar-label">光照</span>
+    </a>
+  </li>
+
+<!--   <li class="boxControl" id="shuimian">
+    <a href="">
+      <span class="am-icon-lg am-icon-moon-o"></span>
+      <span class="am-navbar-label">睡眠</span>
+    </a>
+  </li> -->
+
+<!--   <li class="boxControl" id="lijia">
+    <a href="">
+      <span class="am-icon-lg am-icon-shield"></span>
+      <span class="am-navbar-label">离家</span>
+    </a>
+  </li> -->
+
+  <li class="boxControl" id="gengduo">
+    <a href="">
+      <span class="am-icon-lg am-icon-plus"></span>
+      <span class="am-navbar-label">更多</span>
+    </a>
+  </li>
+</ul>
+
+
+
+
+<!-- <div class="am-g instructions">
+        <p>Southwest Petroleum University<br/>
+        西南石油大学<br/>
+        物联网工程</p>
+</div> -->
+
+
+<!-- <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
+  <ul class="am-slides">
+    <li>
+      <img src="http://s.amazeui.org/media/i/demos/bing-3.jpg">
+    </li>
+    <li>
+      <div class="am-g instructions">
+        <h1>智能家居控制系统</h1>
+        <p>Southwest Petroleum University<br/>
+        西南石油大学<br/>
+        物联网工程</p>
+      </div>
+    </li>
+
+    <li>
+      <div>2</div>
+    </li>
+  </ul>
+</div> -->
+
+
+
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
+id="">
+  <ul class="am-navbar-nav am-cf am-avg-sm-4">
+    <li>
+      <a href="/home" class="">
+        <span class="am-icon-home"></span>
+        <span class="am-navbar-label">主页</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/record" class="">
+        <span class="am-icon-signal"></span>
+        <span class="am-navbar-label">记录</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/setting" class="">
+        <span class="am-icon-gear"></span>
+        <span class="am-navbar-label">设置</span>
+      </a>
+    </li>
+
+<!--     <li>
+      <a href="tel:13568821053" class="">
+        <span class="am-icon-phone"></span>
+        <span class="am-navbar-label">呼叫</span>
+      </a>
+    </li> -->
+
+  </ul>
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="javascripts/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="/javascripts/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="/javascripts/amazeui.min.js"></script>
+<!--
+<script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script> -->
+<script type="text/javascript" src="javascripts/openlink.js"></script>
+<script>
+  $(function(){
+
+var item = {};
+var username = {};
+
+    $("#kaichuang").click(function(){
+      $.ajax({
+        url: '/kaichuang',
+        type: 'POST',
+        datatype:'json',
+        success: function(data){
+          if(data){
+            console.log('接收到的数据 data:' + data);
+          }else{
+            console.log('没有收到数据！')
+          }
+        },
+        error: function(data,err){
+            console.log('ajax请求失败！'); }
+      }); //ajax
+    });   //开窗
+
+
+
+    $("#guanchuang").click(function(){
+      $.ajax({
+        url: '/guanchuang',
+        type: 'POST',
+        datatype:'json',
+        success: function(data){
+          if(data){
+            console.log('接收到的数据 data:' + data);
+          }else{
+            console.log('没有收到数据！')
+          }
+        },
+        error: function(data,err){
+            console.log('ajax请求失败！'); }
+      }); //ajax
+    });   //关窗
+
+
+    $("#kaideng").click(function(){
+      $.ajax({
+        url: '/kaideng',
+        type: 'POST',
+        datatype:'json',
+        success: function(data){
+          if(data){
+            console.log('接收到的数据 data:' + data);
+          }else{
+            console.log('没有收到数据！')
+          }
+        },
+        error: function(data,err){
+            console.log('ajax请求失败！'); }
+      }); //ajax
+    });   //开灯
+
+
+    $("#guandeng").click(function(){
+      $.ajax({
+        url: '/guandeng',
+        type: 'POST',
+        datatype:'json',
+        success: function(data){
+          if(data){
+            console.log('接收到的数据 data:' + data);
+          }else{
+            console.log('没有收到数据！')
+          }
+        },
+        error: function(data,err){
+            console.log('ajax请求失败！'); }
+      }); //ajax
+    });   //关灯
+
+
+    $("#wenshidu").click(function(){
+      $.ajax({
+        url: '/wenshidu',
+        type: 'POST',
+        datatype:'json',
+        success: function(data){
+          if(data){
+            console.log('接收到的数据 data:' + data);
+          }else{
+            console.log('没有收到数据！')
+          }
+        },
+        error: function(data,err){
+            console.log('ajax请求失败！'); }
+      }); //ajax
+    });   //温湿度
+
+
+
+
+    $("#guangzhao").click(function(){
+      $.ajax({
+        url: '/guangzhao',
+        type: 'POST',
+        datatype:'json',
+        success: function(data){
+          if(data){
+            console.log('接收到的数据 data:' + data);
+          }else{
+            console.log('没有收到数据！')
+          }
+        },
+        error: function(data,err){
+            console.log('ajax请求失败！'); }
+      }); //ajax
+    });   //光照
+
+  })
+</script>
+
+</body>
+</html>

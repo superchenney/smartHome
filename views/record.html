@@ -1,0 +1,119 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>智能家居控制系统SmartHome</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="SmartHome"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="/stylesheets/amazeui.min.css"/>
+  <link rel="stylesheet" href="/stylesheets/admin.css">
+  <style>
+
+.am-header{
+  background-color: #3AB4F3;
+  padding: 5px;
+}
+
+
+</style>
+</head>
+<body>
+
+<header data-am-widget="header" class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+      <a href="/home" class="am-header-icon  am-icon-arrow-left"></a>
+    </div>
+    <h1 class="am-header-title">
+      <a href="/home" class="">控制记录</a>
+    </h1>
+
+
+</header>
+
+<table class="am-table am-table-striped am-text-nowrap am-table-hover am-table-centered table-main">
+  <thead>
+  <tr>
+    <th>编号</th>
+    <th>房间</th>
+    <th>操作</th>
+    <th>用户</th>
+    <th>时间</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for(var i=0; i<item.length;i++) {%>
+  <tr>
+    <td><%= i+1 %></td>
+    <td><%=item[i].housename%></td>
+    <td><%=item[i].operate%></td>
+    <td><%=item[i].username%></td>
+    <td><%=item[i].date.toLocaleString()%></td>
+    <!-- <td><%=item[i].date.toDateString()%></td> -->
+    <!-- <td>客厅</td>
+    <td>关窗</td>
+    <td >chenney</td>
+    <td>2012-10-01</td> -->
+  <% } %>
+  </tr>
+  </tbody>
+</table>
+
+
+
+
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
+id="">
+  <ul class="am-navbar-nav am-cf am-avg-sm-4">
+    <li>
+      <a href="/home" class="">
+        <span class="am-icon-home"></span>
+        <span class="am-navbar-label">主页</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/record" class="">
+        <span class="am-icon-signal"></span>
+        <span class="am-navbar-label">记录</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/setting" class="">
+        <span class="am-icon-gear"></span>
+        <span class="am-navbar-label">设置</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="javascripts/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="/javascripts/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="/javascripts/amazeui.min.js"></script>
+<!--
+<script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script> -->
+<script type="text/javascript" src="javascripts/openlink.js"></script>
+<script>
+  var item = {};
+</script>
+</body>
+</html>

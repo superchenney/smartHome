@@ -1,2 +1,1 @@
-# smartHome
-IOT nodejs
+智能家居系统
