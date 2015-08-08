@@ -21,18 +21,11 @@
   <link rel="stylesheet" href="/stylesheets/amazeui.min.css"/>
   <link rel="stylesheet" href="/stylesheets/admin.css">
   <style>
-.am-header{
 
-  opacity: 0;
-  padding: 5px;
-}
-.am-icon-arrow-left{
-  opacity: 1;
-  z-index: 4;
-}
-
-
-
+  .am-header{
+    padding: 20px;
+    margin: 5px;
+  }
 
 body {
   background-color: white;
@@ -43,8 +36,8 @@ body {
 .sunshine {
   margin: 10%;
   display: inline-block;
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   border-radius: 100%;
   background-color: white;
 }
@@ -107,33 +100,32 @@ body {
 
 #main{
   z-index: 3;
-  float:right;
+
 }
 
 </style>
 </head>
 <body>
 
-<header data-am-widget="header" class="am-header am-header-default">
+<header data-am-widget="header" class="am-header">
     <div class="am-header-left am-header-nav">
-      <a href="/home" class="am-header-icon  am-icon-arrow-left"></a>
+      <a href="/home" class="am-header-icon  am-icon-arrow-left"> 返回</a>
     </div>
 </header>
 
 
 
-        <div class="sunshine"></div>
-        <div class="sunshine"></div>
-        <div class="sunshine"></div>
-        <div class="sunshine"></div>
-        <div class="sunshine"></div>
-        <div class="sunshine"></div>
-
-
-
-
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 <div id="main" style="height:400px "></div>
+
+
+
+<div class="sunshine"></div>
+<!-- <div class="sunshine"></div> -->
+<!-- <div class="sunshine"></div> -->
+<!-- <div class="sunshine"></div>
+<div class="sunshine"></div>
+<div class="sunshine"></div> -->
 
 
 
@@ -166,6 +158,9 @@ id="">
   </ul>
 </div>
 
+
+
+
 <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
@@ -173,6 +168,7 @@ id="">
 <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="javascripts/openlink.js"></script>
 <!--<![endif]-->
 <script src="/javascripts/amazeui.min.js"></script>
 <!-- ECharts单文件引入 -->
@@ -189,42 +185,46 @@ require.config({
 require(
       [
     'echarts',
-    'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+    'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
       ],
 function (ec) {
 // 基于准备好的dom，初始化echarts图表
 var myChart = ec.init(document.getElementById('main'));
 var option = {
-        title : {
-        text: '温湿度情况',
-        subtext: '最近一周'
+    title : {
+        text: '光照变化',
+        subtext: '最近24小时'
     },
     tooltip : {
         trigger: 'axis'
     },
     legend: {
-        data:['温度','湿度']
+        data:['光照情况']
     },
     toolbox: {
-        show : true
+        show : false
     },
     calculable : true,
     xAxis : [
         {
             type : 'category',
-            data : ['1月','2月','3月','4月','5月','6月','7月']
+            boundaryGap : false,
+            data : ['01时','02时','03时','04时','05时','06时','07时','08时','09时','10时','11时','12时','13时','14时','15时','16时','17时','18时',]
         }
     ],
     yAxis : [
         {
-            type : 'value'
+            type : 'value',
+            axisLabel : {
+                formatter: '{value} Lux'
+            }
         }
     ],
     series : [
         {
-            name:'温度',
-            type:'bar',
-            data:[23, 24, 30, 33, 25, 26.5, 30.6],
+            name:'光照情况',
+            type:'line',
+            data:[11, 11, 15, 13, 12, 13, 10,11, 11, 15, 13, 12, 13, 10,11, 11, 15, 13],
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},
@@ -236,34 +236,11 @@ var option = {
                     {type : 'average', name: '平均值'}
                 ]
             }
-        },
-        {
-            name:'湿度',
-            type:'bar',
-            data:[43, 59, 90, 26, 28, 70, 76],
-            // markPoint : {
-            //     data : [
-            //         {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
-            //         {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
-            //     ]
-            // },
-            markPoint : {
-                data : [
-                    {type : 'max', name: '最大值'},
-                    {type : 'min', name: '最小值'}
-                ]
-            },
-            markLine : {
-                data : [
-                    {type : 'average', name : '平均值'}
-                ]
-            }
         }
     ]
 };
-
-                // 为echarts对象加载数据
-                myChart.setOption(option);
+      // 为echarts对象加载数据
+      myChart.setOption(option);
             }
         );
     </script>

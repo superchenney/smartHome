@@ -11,7 +11,7 @@
   <link rel="icon" sizes="192x192" href="/img/app-icon72x72@2x.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="道闸控制系统"/>
+  <meta name="apple-mobile-web-app-title" content="SmartHome"/>
   <link rel="apple-touch-icon-precomposed" href="/img/app-icon72x72@2x.png">
   <meta name="msapplication-TileImage" content="/img/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
@@ -59,10 +59,17 @@
 }
 
 .loginHome{
-  display: block;
+  display: inline-block;
   text-align: center;
-  margin: 5px;
-  padding: 5px;
+  margin: 10px;
+  padding: 5px;;
+}
+
+#loginbox{
+  display: block;
+  padding: 0;
+  margin: auto;
+  text-align: center;
 }
 
 </style>
@@ -72,12 +79,15 @@
 
 
   <div class="house-container">
+
+  <div id="loginbox">
     <span class="title">智能家居控制系统</span>
     <div class="loginHome">
       <a href="/login" class="am-btn am-btn-primary">登录</a>
       <a href="/register" class="am-btn am-btn-danger">注册</a>
     </div>
-    
+  </div>
+
     <div class="house-inner-container">
       <div class="overlay-shadow"></div>
       <div class="tree">
