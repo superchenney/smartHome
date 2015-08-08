@@ -256,18 +256,51 @@ router.route('/guandeng').post(function(req,res){
 
 
 
-// 记录页面
-router.get('/record', function(req, res,next) {
-var Operate = global.dbHandel.getModel('operate');
-  	Operate.find({},function(err,doc){
-  						if(err){
-  							console.log(err);
-  						}else{
-  							console.log('记录 item : ' + doc);
-  							res.render("record",{title:'操作记录',item:doc});
-              };	//else
-  					});	//Operate
-  });
+// // 记录页面
+// router.get('/record', function(req, res,next) {
+// var Operate = global.dbHandel.getModel('operate');
+//   	Operate.find({},function(err,doc){
+//   						if(err){
+//   							console.log(err);
+//   						}else{
+//   							console.log('记录 item : ' + doc);
+//   							res.render("record",{title:'操作记录',item:doc});
+//               };	//else
+//   					});	//Operate
+//   });
+
+
+  // 记录页面
+  router.get('/record', function(req, res,next) {
+  var Operate = global.dbHandel.getModel('operate');
+    	Operate.find({}).sort('-date').exec(function(err,doc){
+    						if(err){
+    							console.log(err);
+    						}else{
+    							console.log('记录 item : ' + doc);
+    							res.render("record",{title:'操作记录',item:doc});
+                };	//else
+    					});	//Operate
+    });     //按时间排序，最近操作排在第一
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // res.render('record', { title: '记录' });
 // });
