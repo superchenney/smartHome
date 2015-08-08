@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 body {
   background-color: #34495e;
 }
@@ -296,7 +295,7 @@ body {
 }
 
 .house-container {
-  width: 550px;
+  width: 500px;
   margin: 0 auto;
   height: 400px;
   top: 50%;
@@ -311,7 +310,7 @@ body {
   font-family: "Open Sans", sans-serif;
   color: white;
   font-size: 36px;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 
 
@@ -586,4 +585,3 @@ body {
     -webkit-transform: rotate(0deg);
   }
 }
-
