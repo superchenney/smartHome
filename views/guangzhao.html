@@ -109,6 +109,8 @@ body {
   font-size: 20px;
   margin: 0px;
   padding: 0px;
+  /*color:#F53B2E;*/
+  /*color:black;*/
 }
 
 .inspired h1{
@@ -149,25 +151,24 @@ body {
 
 
 
-<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
-id="">
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default">
   <ul class="am-navbar-nav am-cf am-avg-sm-4">
     <li>
-      <a href="/home" class="">
+      <a href="/home">
         <span class="am-icon-home"></span>
         <span class="am-navbar-label">主页</span>
       </a>
     </li>
 
     <li>
-      <a href="/record" class="">
+      <a href="/record">
         <span class="am-icon-signal"></span>
         <span class="am-navbar-label">记录</span>
       </a>
     </li>
 
     <li>
-      <a href="/setting" class="">
+      <a href="/setting">
         <span class="am-icon-gear"></span>
         <span class="am-navbar-label">设置</span>
       </a>
@@ -194,6 +195,11 @@ id="">
 <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 
 <script type="text/javascript">
+$(function(){
+var gzDate = ['01时','02时','03时','04时','05时','06时','07时','08时','09时','10时','11时','12时','13时','14时','15时','16时','17时','18时'];
+var gzData = [11, 11, 15, 13, 12, 13, 10,11, 11, 15, 13, 12, 13, 10,11, 11, 15, 13];
+
+
 // 路径配置
 require.config({
     paths: {
@@ -228,7 +234,7 @@ var option = {
         {
             type : 'category',
             boundaryGap : false,
-            data : ['01时','02时','03时','04时','05时','06时','07时','08时','09时','10时','11时','12时','13时','14时','15时','16时','17时','18时',]
+            data : gzDate
         }
     ],
     yAxis : [
@@ -243,7 +249,7 @@ var option = {
         {
             name:'光照情况',
             type:'line',
-            data:[11, 11, 15, 13, 12, 13, 10,11, 11, 15, 13, 12, 13, 10,11, 11, 15, 13],
+            data: gzData,
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},
@@ -262,16 +268,11 @@ var option = {
       myChart.setOption(option);
             }
         );
-    </script>
+
+});
+</script>
 <!--
 <script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script> -->
-<script type="text/javascript" src="javascripts/openlink.js"></script>
-<script>
-$(function(){
-  // var username = {};
-
-);
-</script>
 
 </body>
 </html>

@@ -29,6 +29,10 @@
   margin: 5px;
 }
 
+.am-header-default .am-header-nav > a{
+  font-size: 16px;
+  color: white;
+}
 body {
   background: #0093d9;
 }
@@ -184,8 +188,10 @@ body {
       <li><div></div><div></div></li>
       <li><div></div><div></div></li>
       <li><div></div><div></div></li>
-      <li><div></div><div></div></li></ul>
+      <li><div></div><div></div></li>
+    </ul>
   </div>
+
     <div class="cloud">
       <div class="bubble"></div>
       <div class="bubble"></div>
@@ -197,7 +203,6 @@ body {
         <p>温度</p>
         <h1>23  &#8451</h1>
       </div>
-      <!-- <sup>2</sup> -->
 
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
@@ -241,10 +246,30 @@ id="">
 <script src="/javascripts/jquery.min.js"></script>
 <!--<![endif]-->
 <script src="/javascripts/amazeui.min.js"></script>
+
+<!-- <script>
+$(function(){
+  // var username = {};
+  var dateUpdate = ['1号','2号','3号','4号','5号','6号','7号'];
+  var wendu = [23, 24, 30, 33, 25, 26.5, 30.6];
+  var shidu = [43, 59, 90, 26, 28, 70, 76];
+
+);
+</script> -->
+
 <!-- ECharts单文件引入 -->
 <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 
 <script type="text/javascript">
+$(function(){
+var wsddate = ['1号','2号','3号','4号','5号','6号','7号'];
+var wendu = [23, 24, 30, 33, 25, 26.5, 30.6];
+var shidu = [43, 59, 90, 26, 28, 70, 76];
+
+
+
+
+
 // 路径配置
 require.config({
     paths: {
@@ -278,7 +303,8 @@ var option = {
     xAxis : [
         {
             type : 'category',
-            data : ['1号','2号','3号','4号','5号','6号','7号']
+            // data : ['1号','2号','3号','4号','5号','6号','7号']
+            data : wsddate
         }
     ],
     yAxis : [
@@ -290,7 +316,8 @@ var option = {
         {
             name:'温度',
             type:'bar',
-            data:[23, 24, 30, 33, 25, 26.5, 30.6],
+            // data:[23, 24, 30, 33, 25, 26.5, 30.6],
+            data: wendu,
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},
@@ -306,7 +333,8 @@ var option = {
         {
             name:'湿度',
             type:'bar',
-            data:[43, 59, 90, 26, 28, 70, 76],
+            // data:[43, 59, 90, 26, 28, 70, 76],
+            data: shidu,
             // markPoint : {
             //     data : [
             //         {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
@@ -327,21 +355,17 @@ var option = {
         }
     ]
 };
-
-                // 为echarts对象加载数据
-                myChart.setOption(option);
+  // 为echarts对象加载数据
+    myChart.setOption(option);
             }
         );
-    </script>
+
+});
+</script>
 <!--
 <script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script> -->
 <script type="text/javascript" src="javascripts/openlink.js"></script>
-<script>
-$(function(){
-  // var username = {};
 
-);
-</script>
 
 </body>
 </html>
