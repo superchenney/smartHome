@@ -66,8 +66,7 @@ app.use("/logout",routes); // 即为为路径 /logout 设置路由
 app.use("/kaichuang",routes);
 app.use("/guanchuang",routes);
 app.use("/kaideng",routes);
-// app.use("/guandeng",routes);
-// app.use("/wenshidu",routes);
+
 app.use("/guangzhao",routes);
 app.use("/gengduo",routes);
 

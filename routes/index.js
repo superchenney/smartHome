@@ -223,6 +223,16 @@ router.route('/guandeng').post(function(req,res){
 
 
 
+router.get('/wenshidu', function(req, res) {
+  res.render('wenshidu', { title: "温湿度" });    // 到达此路径则渲染index文件，并传出title值供 index.html使用
+});
+
+
+router.get('/guangzhao', function(req, res) {
+  res.render('guangzhao', { title: '光照' });    // 到达此路径则渲染index文件，并传出title值供 index.html使用
+});
+
+
 
 
   // 记录页面
@@ -237,20 +247,6 @@ router.route('/guandeng').post(function(req,res){
                 };	//else
     					});	//Operate
     });     //按时间排序，最近操作排在第一
-
-
-
-router.get('/wenshidu', function(req, res) {
-  res.render('wenshidu', { title: "温湿度" });    // 到达此路径则渲染index文件，并传出title值供 index.html使用
-});
-
-
-
-router.get('/guangzhao', function(req, res) {
-  res.render('guangzhao', { title: '光照' });    // 到达此路径则渲染index文件，并传出title值供 index.html使用
-});
-
-
 
 
 

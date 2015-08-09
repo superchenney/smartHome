@@ -125,6 +125,11 @@
 
 }
 
+#username{
+  padding: 10px;
+  margin: 40px auto;
+}
+
 </style>
 </head>
 <body>
@@ -147,7 +152,7 @@
   <div class="am-offcanvas-bar">
     <div class="am-offcanvas-content">
       <ul class="am-nav">
-        <li class="am-btn">Hi,<%= username %></li>
+        <li class="am-btn" id="username" >Hi,<%= username %></li>
         <li class="am-badge am-text-lg am-badge-primary"><a href="#">开始使用</a></li>
         <li class="am-badge am-text-lg am-badge-primary"><a href="#">技术支持</a></li>
         <li class="am-badge am-text-lg am-badge-primary"><a href="#">团队介绍</a></li>
@@ -238,19 +243,6 @@
     </a>
   </li>
 
-<!--   <li class="boxControl" id="shuimian">
-    <a href="">
-      <span class="am-icon-lg am-icon-moon-o"></span>
-      <span class="am-navbar-label">睡眠</span>
-    </a>
-  </li> -->
-
-<!--   <li class="boxControl" id="lijia">
-    <a href="">
-      <span class="am-icon-lg am-icon-shield"></span>
-      <span class="am-navbar-label">离家</span>
-    </a>
-  </li> -->
 
   <li class="boxControl" id="gengduo">
     <a href="">
@@ -261,34 +253,6 @@
 </ul>
 
 
-
-
-<!-- <div class="am-g instructions">
-        <p>Southwest Petroleum University<br/>
-        西南石油大学<br/>
-        物联网工程</p>
-</div> -->
-
-
-<!-- <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
-  <ul class="am-slides">
-    <li>
-      <img src="http://s.amazeui.org/media/i/demos/bing-3.jpg">
-    </li>
-    <li>
-      <div class="am-g instructions">
-        <h1>智能家居控制系统</h1>
-        <p>Southwest Petroleum University<br/>
-        西南石油大学<br/>
-        物联网工程</p>
-      </div>
-    </li>
-
-    <li>
-      <div>2</div>
-    </li>
-  </ul>
-</div> -->
 
 
 
@@ -315,14 +279,6 @@ id="">
         <span class="am-navbar-label">设置</span>
       </a>
     </li>
-
-<!--     <li>
-      <a href="tel:13568821053" class="">
-        <span class="am-icon-phone"></span>
-        <span class="am-navbar-label">呼叫</span>
-      </a>
-    </li> -->
-
   </ul>
 </div>
 
