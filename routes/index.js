@@ -86,17 +86,8 @@ router.get("/home",function(req,res){
 	if(!req.session.user){ 					//到达/home路径首先判断是否已经登录
 		req.session.error = "请先登录"
 		res.redirect("/login");				//未登录则重定向到 /login 路径
-	}
+	   }
     res.render("home",{title:'控制台页面',username:req.session.user.name});
-	// var Gate = global.dbHandel.getModel('gate');
-	// Gate.find({},function(err,doc){
-	// 					if(err){
-	// 						console.log(err);
-	// 					}else{
-	// 						console.log('记录 item : ' + doc);
-	// 						res.render("home",{title:'控制台页面',item:doc});
-	// 						}	//else
-	// 				});	//Gate
 });	//get/home
 
 
@@ -179,95 +170,59 @@ router.get("/home",function(req,res){
 
 
 
-// function showInfo(req,res){
-// 		var Operate = global.dbHandel.getModel('operate');
-// 		Operate.find({},function(err,doc){
-// 						if(err){
-// 							console.log(err);
-// 						}else{
-// 							// var item = doc;
-// 							console.log('记录 item : ' + doc);
-// 							router.get("/home",function(req,res){
-// 								res.render("home",{title:'控制台页面',item:doc});
-// 							})
-// 							}	//else
-// 					})	//Gate
-// 	}	//showInofo
+function saveInfo(req,housename,operate){
+  var Operate = global.dbHandel.getModel('operate');
+      Operate.create({
+          housename: housename,
+          username:  req.session.user.name,
+          operate: operate,
+          data:Date.now()
+        });
+        console.log('*****  数据已保存  ******');
+	}	//svaeInofo
+
+//
+//
+//   router.route('/kaichuang').post(function(req,res){
+//   	  // kaiChuang();
+//
+//   });
 
 
 
 
-
-
-
-router.route('/kaichuang').post(function(req,res){
+router.route('/kaichuang').post(function(req){
 	  // kaiChuang();
-	  var Operate = global.dbHandel.getModel('operate');
- 			 	Operate.create({
- 			 	    housename: '卧室',
- 		  	    username:  req.session.user.name,
- 		  	    operate: '开窗',
- 		  	    data:Date.now()
-          });
- 			 		console.log('*****  开窗——数据已保存   ******')
+    saveInfo(req,'卧室','开窗');
+    console.log('*****  开窗   ******');
 });
 
 
 
 router.route('/guanchuang').post(function(req,res){
 	  // guanChuang();
-	  var Operate = global.dbHandel.getModel('operate');
- 			 	Operate.create({
- 			 	    housename: '卧室',
- 		  	    username: req.session.user.name,
- 		  	    operate: '关窗',
- 		  	    data:Date.now()
- 		       })
- 			 		console.log('*****  关窗——数据已保存   ******')
+    saveInfo(req,'卧室','关窗')
+ 		console.log('*****  关窗   ******')
 });
 
 
 
 router.route('/kaideng').post(function(req,res){
 	  // kaiDeng();
-	  var Operate = global.dbHandel.getModel('operate');
- 			 	Operate.create({
- 			 	    housename: '客厅',
- 		  	    username: req.session.user.name,
- 		  	    operate: '开灯',
- 		  	    data:Date.now()
- 		       })
- 			 		console.log('*****  开灯——数据已保存   ******')
+    saveInfo(req,'客厅','开灯');
+ 	  console.log('*****  开灯   ******');
 });
 
 
 
 router.route('/guandeng').post(function(req,res){
 	  // guanDeng();
-	  var Operate = global.dbHandel.getModel('operate');
- 			 	Operate.create({
- 			 	    housename: '客厅',
- 		  	    username: req.session.user.name,
- 		  	    operate: '关灯',
- 		  	    data:Date.now()
- 		       })
- 			 		console.log('*****  关灯——数据已保存   ******')
+	  saveInfo(req,'客厅','关灯');
+ 		console.log('*****  关灯   ******');
 });
 
 
 
-// // 记录页面
-// router.get('/record', function(req, res,next) {
-// var Operate = global.dbHandel.getModel('operate');
-//   	Operate.find({},function(err,doc){
-//   						if(err){
-//   							console.log(err);
-//   						}else{
-//   							console.log('记录 item : ' + doc);
-//   							res.render("record",{title:'操作记录',item:doc});
-//               };	//else
-//   					});	//Operate
-//   });
 
 
   // 记录页面
@@ -285,45 +240,13 @@ router.route('/guandeng').post(function(req,res){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // res.render('record', { title: '记录' });
-// });
-
-// router.route("/record").get(function(req,res){
-//  //var Operate = global.dbHandel.getModel('operate');
-// 	// Operate.find({},function(err,doc){
-// 	// 					if(err){
-// 	// 						console.log(err);
-// 	// 					}else{
-// 	// 						console.log('记录 item : ' + doc);
-// 	// 						res.render("record",{title:'操作记录',item:doc});
-// 	// 						}	//else
-// 	// 				});	//Operate
-// });
-
-router.get('/wenshidu', function(req, res,next) {
+router.get('/wenshidu', function(req, res) {
   res.render('wenshidu', { title: "温湿度" });    // 到达此路径则渲染index文件，并传出title值供 index.html使用
 });
 
 
 
-router.get('/guangzhao', function(req, res,next) {
+router.get('/guangzhao', function(req, res) {
   res.render('guangzhao', { title: '光照' });    // 到达此路径则渲染index文件，并传出title值供 index.html使用
 });
 

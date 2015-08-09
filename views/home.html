@@ -417,42 +417,42 @@ var username = {};
     });   //关灯
 
 
-    $("#wenshidu").click(function(){
-      $.ajax({
-        url: '/wenshidu',
-        type: 'POST',
-        datatype:'json',
-        success: function(data){
-          if(data){
-            console.log('接收到的数据 data:' + data);
-          }else{
-            console.log('没有收到数据！')
-          }
-        },
-        error: function(data,err){
-            console.log('ajax请求失败！'); }
-      }); //ajax
-    });   //温湿度
-
-
-
-
-    $("#guangzhao").click(function(){
-      $.ajax({
-        url: '/guangzhao',
-        type: 'POST',
-        datatype:'json',
-        success: function(data){
-          if(data){
-            console.log('接收到的数据 data:' + data);
-          }else{
-            console.log('没有收到数据！')
-          }
-        },
-        error: function(data,err){
-            console.log('ajax请求失败！'); }
-      }); //ajax
-    });   //光照
+    // $("#wenshidu").click(function(){
+    //   $.ajax({
+    //     url: '/wenshidu',
+    //     type: 'POST',
+    //     datatype:'json',
+    //     success: function(data){
+    //       if(data){
+    //         console.log('接收到的数据 data:' + data);
+    //       }else{
+    //         console.log('没有收到数据！')
+    //       }
+    //     },
+    //     error: function(data,err){
+    //         console.log('ajax请求失败！'); }
+    //   }); //ajax
+    // });   //温湿度
+    //
+    //
+    //
+    //
+    // $("#guangzhao").click(function(){
+    //   $.ajax({
+    //     url: '/guangzhao',
+    //     type: 'POST',
+    //     datatype:'json',
+    //     success: function(data){
+    //       if(data){
+    //         console.log('接收到的数据 data:' + data);
+    //       }else{
+    //         console.log('没有收到数据！')
+    //       }
+    //     },
+    //     error: function(data,err){
+    //         console.log('ajax请求失败！'); }
+    //   }); //ajax
+    // });   //光照
 
   })
 </script>
