@@ -175,7 +175,7 @@ router.route('/kaichuang').post(function(req,res){
 	  
     saveInfo(req,'卧室','开窗');
     console.log('\n' + '*****  ' + req.session.user.name + '开窗   ******' + '\n');
-    res.send(200,"开窗ok");	//AJAX请求返回成功
+    res.status(200).send("开窗ok");	//AJAX请求返回成功
 });
 
 
@@ -185,7 +185,7 @@ router.route('/guanchuang').post(function(req,res){
 	  
     saveInfo(req,'卧室','关窗');
  		console.log('\n' + '*****  ' + req.session.user.name + '关窗   ******' + '\n');
- 		res.send(200,'关窗ok');	//AJAX请求返回成功
+ 		res.status(200).send('关窗ok');	//AJAX请求返回成功
 });
 
 
@@ -195,7 +195,7 @@ router.route('/kaideng').post(function(req,res){
 	  
     saveInfo(req,'客厅','开灯');
  	  console.log('\n' + '*****  ' + req.session.user.name + '开灯   ******' + '\n');
- 	  res.send(200,'开灯ok');	//AJAX请求返回成功
+ 	  res.status(200).send('开灯ok');	//AJAX请求返回成功
 });
 
 
@@ -205,7 +205,7 @@ router.route('/guandeng').post(function(req,res){
 	  
 	  saveInfo(req,'客厅','关灯');
  		console.log('\n' + '*****  ' + req.session.user.name + '关灯   ******' + '\n');
- 		res.send(200,'关灯ok');	//AJAX请求返回成功
+ 		res.status(200).send('关灯ok');	//AJAX请求返回成功
 });
 
 
