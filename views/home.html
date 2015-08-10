@@ -18,8 +18,9 @@
   <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
 
-  <link rel="stylesheet" href="/stylesheets/amazeui.min.css"/>
-  <link rel="stylesheet" href="/stylesheets/admin.css">
+  <!-- <link rel="stylesheet" href="/stylesheets/amazeui.min.css"/> -->
+  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="/stylesheets/admin.min.css">
   <style>
 
 .am-header{
@@ -43,6 +44,10 @@
     display: block;
 }
 
+.boxControl  span {
+    display: block;
+}
+
 .boxControl a span:nth-child(2){
     color: #666666;
 /*    margin: 3px;*/
@@ -50,6 +55,12 @@
 
 }
 
+.boxControl span:nth-child(2){
+    color: #666666;
+/*    margin: 3px;*/
+    padding: 5px;
+
+}
 .feature{
   width: 100%;
   height: 80px;
@@ -114,9 +125,6 @@
 .am-icon-plus{
 }
 
-/*.am-offcanvas-bar{
-  background-color:#999999;
-}*/
 
 #instructions{
   text-align: center;
@@ -127,7 +135,8 @@
 
 #username{
   padding: 10px;
-  margin: 40px auto;
+  margin: 35px auto;
+  font-size: 20px;
 }
 
 </style>
@@ -202,31 +211,31 @@
 <ul class="am-avg-sm-3">
 
   <li class="boxControl" id="kaichuang">
-    <a href="">
-      <span class="am-icon-lg am-icon-square-o"></span>
+
+      <span class="am-icon-lg am-icon-square-o "></span>
       <span class="am-navbar-label">开窗</span>
-    </a>
+
   </li>
 
   <li class="boxControl" id="guanchuang">
-    <a href="">
+
       <span class="am-icon-lg am-icon-square"></span>
       <span class="am-navbar-label">关窗</span>
-    </a>
+
   </li>
 
   <li class="boxControl" id="kaideng">
-    <a href="">
+
       <span class="am-icon-lg am-icon-lightbulb-o"></span>
       <span class="am-navbar-label">开灯</span>
-    </a>
+
   </li>
 
   <li class="boxControl" id="guandeng">
-    <a href="">
+
       <span class="am-icon-lg am-icon-power-off"></span>
       <span class="am-navbar-label">关灯</span>
-    </a>
+
   </li>
 
   <li class="boxControl" id="wenshidu">
@@ -245,10 +254,10 @@
 
 
   <li class="boxControl" id="gengduo">
-    <a href="">
+
       <span class="am-icon-lg am-icon-plus"></span>
       <span class="am-navbar-label">更多</span>
-    </a>
+
   </li>
 </ul>
 
@@ -288,9 +297,11 @@ id="">
 <script src="javascripts/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/javascripts/jquery.min.js"></script>
+<!-- <script src="/javascripts/jquery.min.js"></script> -->
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <!--<![endif]-->
-<script src="/javascripts/amazeui.min.js"></script>
+<!-- <script src="/javascripts/amazeui.min.js"></script> -->
+<script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script>
 <!--
 <script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script> -->
 <script type="text/javascript" src="javascripts/openlink.js"></script>
@@ -301,11 +312,13 @@ var item = {};
 var username = {};
 
     $("#kaichuang").click(function(){
+      $('#kaichuang').addClass('am-animation-scale-up');  //淡出动画
       $.ajax({
         url: '/kaichuang',
         type: 'POST',
         datatype:'json',
         success: function(data){
+          setTimeout("$('#kaichuang').removeClass('am-animation-scale-up')",1000); //延时取消动画
           if(data){
             console.log('接收到的数据 data:' + data);
           }else{
@@ -320,11 +333,13 @@ var username = {};
 
 
     $("#guanchuang").click(function(){
+      $('#guanchuang').addClass('am-animation-scale-up');  //淡出动画
       $.ajax({
         url: '/guanchuang',
         type: 'POST',
         datatype:'json',
         success: function(data){
+          setTimeout("$('#guanchuang').removeClass('am-animation-scale-up')",1000); //延时取消动画
           if(data){
             console.log('接收到的数据 data:' + data);
           }else{
@@ -338,11 +353,13 @@ var username = {};
 
 
     $("#kaideng").click(function(){
+      $('#kaideng').addClass('am-animation-scale-up');  //淡出动画
       $.ajax({
         url: '/kaideng',
         type: 'POST',
         datatype:'json',
         success: function(data){
+          setTimeout("$('#kaideng').removeClass('am-animation-scale-up')",1000); //延时取消动画
           if(data){
             console.log('接收到的数据 data:' + data);
           }else{
@@ -356,11 +373,13 @@ var username = {};
 
 
     $("#guandeng").click(function(){
+      $('#guandeng').addClass('am-animation-scale-up');  //淡出动画
       $.ajax({
         url: '/guandeng',
         type: 'POST',
         datatype:'json',
         success: function(data){
+          setTimeout("$('#guandeng').removeClass('am-animation-scale-up')",1000); //延时取消动画
           if(data){
             console.log('接收到的数据 data:' + data);
           }else{
@@ -373,42 +392,6 @@ var username = {};
     });   //关灯
 
 
-    // $("#wenshidu").click(function(){
-    //   $.ajax({
-    //     url: '/wenshidu',
-    //     type: 'POST',
-    //     datatype:'json',
-    //     success: function(data){
-    //       if(data){
-    //         console.log('接收到的数据 data:' + data);
-    //       }else{
-    //         console.log('没有收到数据！')
-    //       }
-    //     },
-    //     error: function(data,err){
-    //         console.log('ajax请求失败！'); }
-    //   }); //ajax
-    // });   //温湿度
-    //
-    //
-    //
-    //
-    // $("#guangzhao").click(function(){
-    //   $.ajax({
-    //     url: '/guangzhao',
-    //     type: 'POST',
-    //     datatype:'json',
-    //     success: function(data){
-    //       if(data){
-    //         console.log('接收到的数据 data:' + data);
-    //       }else{
-    //         console.log('没有收到数据！')
-    //       }
-    //     },
-    //     error: function(data,err){
-    //         console.log('ajax请求失败！'); }
-    //   }); //ajax
-    // });   //光照
 
   })
 </script>

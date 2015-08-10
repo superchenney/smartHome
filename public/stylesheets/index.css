@@ -10,6 +10,7 @@ body {
   border-radius: 25px;
   position: absolute;
   bottom: 225px;
+  /*top: 65px;*/
   opacity: 0.6;
   -webkit-animation: cloud-mover 45s linear infinite;
   -moz-animation: cloud-mover 45s linear infinite;
@@ -25,6 +26,7 @@ body {
   border-radius: 25px;
   position: absolute;
   bottom: 210px;
+  /*top: 55px;*/
   opacity: 0.6;
   -webkit-animation: cloud-mover 55s linear infinite;
   -moz-animation: cloud-mover 55s linear infinite;
@@ -40,6 +42,7 @@ body {
   border-radius: 25px;
   position: absolute;
   bottom: 235px;
+  /*top: 80px;*/
   opacity: 0.6;
   -webkit-animation: cloud-mover 65s linear infinite;
   -moz-animation: cloud-mover 65s linear infinite;
@@ -55,6 +58,7 @@ body {
   border-radius: 25px;
   position: absolute;
   bottom: 276px;
+  /*top: 126px;*/
   opacity: 0.6;
   -webkit-animation: cloud-mover 75s linear infinite;
   -moz-animation: cloud-mover 75s linear infinite;
@@ -70,6 +74,7 @@ body {
   border-radius: 25px;
   position: absolute;
   bottom: 260px;
+  /*top: 110px;*/
   opacity: 0.6;
   -webkit-animation: cloud-mover 85s linear infinite;
   -moz-animation: cloud-mover 85s linear infinite;
@@ -85,6 +90,7 @@ body {
   border-radius: 25px;
   position: absolute;
   bottom: 250px;
+  /*top: 110px;*/
   opacity: 0.6;
   -webkit-animation: cloud-mover 95s linear infinite;
   -moz-animation: cloud-mover 95s linear infinite;
@@ -100,6 +106,7 @@ body {
   border-radius: 25px;
   position: absolute;
   bottom: 285px;
+  /*top: 140px;*/
   opacity: 0.6;
   -webkit-animation: cloud-mover 70s linear infinite;
   -moz-animation: cloud-mover 70s linear infinite;
@@ -115,6 +122,7 @@ body {
   border-radius: 25px;
   position: absolute;
   bottom: 313px;
+  /*top: 162px;*/
   opacity: 0.6;
   -webkit-animation: cloud-mover 50s linear infinite;
   -moz-animation: cloud-mover 50s linear infinite;
@@ -130,6 +138,7 @@ body {
   border-radius: 25px;
   position: absolute;
   bottom: 305px;
+  /*top: 155px;*/
   opacity: 0.6;
   -webkit-animation: cloud-mover 125s linear infinite;
   -moz-animation: cloud-mover 125s linear infinite;
@@ -295,13 +304,15 @@ body {
 }
 
 .house-container {
-  width: 550px;
+  /*width: 550px;*/
+  width: 100%;
   margin: 0 auto;
-  height: 400px;
-  top: 50%;
-  left: 50%;
-  margin-left: -250px;
-  margin-top: -200px;
+  height: 350px;
+
+  top: 0;
+  /*left: 50%;*/
+  /*margin-left: -250px;
+  margin-top: -200px;*/
   position: absolute;
 }
 .house-container .title{
@@ -309,7 +320,8 @@ body {
   text-align: center;
   font-family: "Open Sans", sans-serif;
   color: white;
-  font-size: 36px;
+  font-size: 35px;
+  padding: 20px 0 0 0;
 }
 
 
@@ -562,18 +574,18 @@ body {
 /*CSS Animations */
 @-webkit-keyframes carride {
   from {
-    -webkit-transform: translateX(650px);
+    -webkit-transform: translateX(450px);
   }
   to {
-    -webkit-transform: translateX(-100px);
+    -webkit-transform: translateX(-10px);
   }
 }
 @-webkit-keyframes cloud-mover {
   from {
-    -webkit-transform: translateX(-100px);
+    -webkit-transform: translateX(-10px);
   }
   to {
-    -webkit-transform: translateX(550px);
+    -webkit-transform: translateX(500px);
   }
 }
 @-webkit-keyframes wheel-spin {

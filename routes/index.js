@@ -129,25 +129,12 @@ router.get("/home",function(req,res){
 // });
 
 
-// var kaimen = new Buffer('2657534E434E411B00000000000000000000000000000100454E44','hex')
-// var guanmen = new Buffer('2657534E434E411B00000000000000000000000000010000454E44','hex')
 
-// function closeGate(){
-// 		serialPort.open(function (error) {
-//   		if (error) {
-//     		console.log('串口打开失败___(关闭道闸): '+error);
-//   		} else {
-//     		console.log('串口打开');
-//   			serialPort.write(guanmen, function(err, results) {
-//    		  	 if(err){
-//   			 	   console.log('write err ' + err);
-//  			   	 	}else{
-//  			    	  console.log('执行成功！———— 关门'+results);
-//   					}
-//   	  		});		 //write
-//   			};			 //else open success
-// 			});				 //open
-// 		}
+var kaichuang = new Buffer('2657534E434E411B00000000000000000000000000010000454E44','hex')
+var guanchuang = new Buffer('2657534E434E411B00000000000000000000000000010000454E44','hex')
+var kaideng = new Buffer('2657534E434E411B00000000000000000000000000010000454E44','hex')
+var guandeng = new Buffer('2657534E434E411B00000000000000000000000000010000454E44','hex')
+
 
 
 // function openGate(){
@@ -176,49 +163,45 @@ function saveInfo(req,housename,operate){
           housename: housename,
           username:  req.session.user.name,
           operate: operate,
-          data:Date.now()
+          date: Date.now()
         });
-        console.log('*****  数据已保存  ******');
+        console.log('\n' + '*****  数据已保存  ******' + '\n');
 	}	//svaeInofo
 
-//
-//
-//   router.route('/kaichuang').post(function(req,res){
-//   	  // kaiChuang();
-//
-//   });
 
 
-
-
-router.route('/kaichuang').post(function(req){
+router.route('/kaichuang').post(function(req,res){
 	  // kaiChuang();
+	  res.send(200,"开窗");	//AJAX请求返回成功
     saveInfo(req,'卧室','开窗');
-    console.log('*****  开窗   ******');
+    console.log('\n' + '*****  ' + req.session.user.name + '开窗   ******' + '\n');
 });
 
 
 
 router.route('/guanchuang').post(function(req,res){
 	  // guanChuang();
+	  res.send(200,'关窗');	//AJAX请求返回成功
     saveInfo(req,'卧室','关窗')
- 		console.log('*****  关窗   ******')
+ 		console.log('\n' + '*****  ' + req.session.user.name + '关窗   ******' + '\n')
 });
 
 
 
 router.route('/kaideng').post(function(req,res){
 	  // kaiDeng();
+	  res.send(200,'开灯');	//AJAX请求返回成功
     saveInfo(req,'客厅','开灯');
- 	  console.log('*****  开灯   ******');
+ 	  console.log('\n' + '*****  ' + req.session.user.name + '开灯   ******' + '\n');
 });
 
 
 
 router.route('/guandeng').post(function(req,res){
 	  // guanDeng();
+	  res.send(200,'关灯');	//AJAX请求返回成功
 	  saveInfo(req,'客厅','关灯');
- 		console.log('*****  关灯   ******');
+ 		console.log('\n' + '*****  ' + req.session.user.name + '关灯   ******' + '\n');
 });
 
 
@@ -242,7 +225,7 @@ router.get('/guangzhao', function(req, res) {
     						if(err){
     							console.log(err);
     						}else{
-    							console.log('记录 item : ' + doc);
+    							// console.log('记录 item : ' + doc);
     							res.render("record",{title:'操作记录',item:doc});
                 };	//else
     					});	//Operate
