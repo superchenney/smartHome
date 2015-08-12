@@ -97,7 +97,7 @@ router.get("/home",function(req,res){
 //serialport
 
 
-// // 打印所有串口
+// 打印所有串口
 // var serialPortC = require("serialport");
 // serialPortC.list(function (err, ports) {
 //   ports.forEach(function(port) {
@@ -130,29 +130,30 @@ router.get("/home",function(req,res){
 
 
 
-var kaichuang = new Buffer('2657534E434E411B00000000000000000000000000010000454E44','hex')
-var guanchuang = new Buffer('2657534E434E411B00000000000000000000000000010000454E44','hex')
-var kaideng = new Buffer('2657534E434E411B00000000000000000000000000010000454E44','hex')
-var guandeng = new Buffer('2657534E434E411B00000000000000000000000000010000454E44','hex')
+var kaichuang  = new Buffer('265352530000000000000000000042000100000000000000000000000000002A','hex');//步进电机顺时针
+var guanchuang = new Buffer('265352530000000000000000000042010000000000000000000000000000002A','hex');//步进电机逆时针
+var kaideng    = new Buffer('26535253000000000000000000004A000000000000000000000000000000002A','hex');//开继电器1
+var guandeng   = new Buffer('26535253000000000000000000004A000100000000000000000000000000002A','hex');//关继电器1
 
 
 
-// function openGate(){
+// function operateSerialport(operate){
 // 		serialPort.open(function (error) {
 //   		if (error) {
-//     		console.log('打开串口失败___(开启道闸): '+error);
+//     		console.log('打开串口失败: '+error);
 //   		} else {
-//     		console.log('串口打开');
-//   			serialPort.write(kaimen, function(err, results) {
+//     		console.log('串口打开\n');
+//   			serialPort.write(operate, function(err, results) {
 //    		  	 if(err){
 //   			 	   console.log('write err ' + err);
 //  			   	 	}else{
-//  			    	  console.log('执行成功！———— 开门'+results);
+//  			    	  console.log(operate + '执行成功！'+results);
 //   					}
 //   		 		}); 	//write
 //   			};			//else open success
-// 			});				//open
+// 			});				//operateSerialport
 // 		}
+
 
 
 
@@ -165,14 +166,13 @@ function saveInfo(req,housename,operate){
           operate: operate,
           date: Date.now()
         });
-        console.log('\n' + '*****  数据已保存  ******' + '\n');
+        console.log('\n' + '*****  数据已保存  ******');
 	}	//svaeInofo
 
 
 
 router.route('/kaichuang').post(function(req,res){
-	  // kaiChuang();
-	  
+	 	// operateSerialport(kaichuang);
     saveInfo(req,'卧室','开窗');
     console.log('\n' + '*****  ' + req.session.user.name + '开窗   ******' + '\n');
     res.status(200).send("开窗ok");	//AJAX请求返回成功
@@ -181,8 +181,8 @@ router.route('/kaichuang').post(function(req,res){
 
 
 router.route('/guanchuang').post(function(req,res){
-	  // guanChuang();
-	  
+
+	  // operateSerialport(guanchuang);
     saveInfo(req,'卧室','关窗');
  		console.log('\n' + '*****  ' + req.session.user.name + '关窗   ******' + '\n');
  		res.status(200).send('关窗ok');	//AJAX请求返回成功
@@ -191,8 +191,8 @@ router.route('/guanchuang').post(function(req,res){
 
 
 router.route('/kaideng').post(function(req,res){
-	  // kaiDeng();
-	  
+
+		// operateSerialport(kaidneg);	  
     saveInfo(req,'客厅','开灯');
  	  console.log('\n' + '*****  ' + req.session.user.name + '开灯   ******' + '\n');
  	  res.status(200).send('开灯ok');	//AJAX请求返回成功
@@ -201,8 +201,8 @@ router.route('/kaideng').post(function(req,res){
 
 
 router.route('/guandeng').post(function(req,res){
-	  // guanDeng();
-	  
+
+		// operateSerialport(guandeng);	  
 	  saveInfo(req,'客厅','关灯');
  		console.log('\n' + '*****  ' + req.session.user.name + '关灯   ******' + '\n');
  		res.status(200).send('关灯ok');	//AJAX请求返回成功
