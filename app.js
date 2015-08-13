@@ -9,6 +9,8 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 
 // var SerialPort = require("serialport").SerialPort;
+ // var socket = require('socket.io-client')('http://localhost');
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');

@@ -4,6 +4,83 @@ var app = express();
 var bodyParser = require('body-parser');
 
 
+
+
+
+
+
+
+var kaichuang  = new Buffer('265352530000000000000000000042000100000000000000000000000000002A','hex');//步进电机顺时针
+var guanchuang = new Buffer('265352530000000000000000000042010000000000000000000000000000002A','hex');//步进电机逆时针
+var kaideng    = new Buffer('26535253000000000000000000004A000000000000000000000000000000002A','hex');//开继电器1
+var guandeng   = new Buffer('26535253000000000000000000004A000100000000000000000000000000002A','hex');//关继电器1
+
+
+
+
+// var yanwuGuan = new Buffer('434E410000000000000032','hex');//步进电机顺时针
+// var yanwuGuan = new Buffer('L11','utf-8');
+// var jdqKai = new Buffer("&SRS0000000000J0000000000000000*");
+
+var net = require('net');
+var HOST = '192.168.12.254';
+var PORT = 8080;
+
+var client = new net.Socket();
+
+client.connect(PORT, HOST, function() {
+    console.log('CONNECTED TO : ' + HOST + ':' + PORT);
+    // console.log("服务器连接远程服务器成功！");
+    // 建立连接后立即向服务器发送数据，服务器将收到这些数据
+    // client.write(yanwuGuan);
+});
+
+// 为客户端添加“data”事件处理函数
+// data是服务器发回的数据
+client.on('data', function(data) {
+  console.log('收到数据: ' + data.toString());
+
+  var operate = data.toString();
+  // var wendu = operate.substring(7,9);
+  // var shidu = operate.substring(17,19);
+
+    // if(operate[0]=='w'){
+    //   console.log('温度数据为: ' + wendu);
+    //   console.log('湿度数据为: ' + shidu);
+    // }
+
+    // console.log('收到硬件数据: ' + data.toString());
+    // 完全关闭连接
+    // client.destroy();
+
+});
+
+// client.write(yanwuGuan);
+
+
+// 为客户端添加“close”事件处理函数
+client.on('close', function() {
+    console.log('Connection closed');
+});
+
+
+client.on('error', function (exception) {              //错误回调
+    console.log('socket error:' + exception);
+    client.end();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* GET index page. */
 router.get('/', function(req, res,next) {
   res.render('index', { title: '首页' });    // 到达此路径则渲染index文件，并传出title值供 index.html使用
@@ -93,71 +170,6 @@ router.get("/home",function(req,res){
 
 
 
-
-//serialport
-
-
-// 打印所有串口
-// var serialPortC = require("serialport");
-// serialPortC.list(function (err, ports) {
-//   ports.forEach(function(port) {
-//     console.log(port.comName);
-//     console.log(port.pnpId);
-//     console.log(port.manufacturer);
-//   });
-// });
-
-// // 串口参数
-// var SerialPort = require("serialport").SerialPort
-// var serialPort = new SerialPort("/dev/cu.usbserial", {
-//   baudrate: 115200
-// });
-
-// //组网成功打印
-// serialPort.open(function (error) {
-//   if ( error ) {
-//     console.log('failed to open: '+error);
-//   } else {
-//     console.log('串口open');
-//     serialPort.on('data', function(data) {
-//       	// console.log('data received: ' + data);
-//       	var dataRecive = new Buffer(data,'utf8');
-//       	var zuwang = dataRecive.toString('hex')
-//       	console.log('组网成功: ' + zuwang);
-//     });
-//   }
-// });
-
-
-
-var kaichuang  = new Buffer('265352530000000000000000000042000100000000000000000000000000002A','hex');//步进电机顺时针
-var guanchuang = new Buffer('265352530000000000000000000042010000000000000000000000000000002A','hex');//步进电机逆时针
-var kaideng    = new Buffer('26535253000000000000000000004A000000000000000000000000000000002A','hex');//开继电器1
-var guandeng   = new Buffer('26535253000000000000000000004A000100000000000000000000000000002A','hex');//关继电器1
-
-
-
-// function operateSerialport(operate){
-// 		serialPort.open(function (error) {
-//   		if (error) {
-//     		console.log('打开串口失败: '+error);
-//   		} else {
-//     		console.log('串口打开\n');
-//   			serialPort.write(operate, function(err, results) {
-//    		  	 if(err){
-//   			 	   console.log('write err ' + err);
-//  			   	 	}else{
-//  			    	  console.log(operate + '执行成功！'+results);
-//   					}
-//   		 		}); 	//write
-//   			};			//else open success
-// 			});				//operateSerialport
-// 		}
-
-
-
-
-
 function saveInfo(req,housename,operate){
   var Operate = global.dbHandel.getModel('operate');
       Operate.create({
@@ -192,7 +204,7 @@ router.route('/guanchuang').post(function(req,res){
 
 router.route('/kaideng').post(function(req,res){
 
-		// operateSerialport(kaidneg);	  
+		// operateSerialport(kaidneg);
     saveInfo(req,'客厅','开灯');
  	  console.log('\n' + '*****  ' + req.session.user.name + '开灯   ******' + '\n');
  	  res.status(200).send('开灯ok');	//AJAX请求返回成功
@@ -202,7 +214,7 @@ router.route('/kaideng').post(function(req,res){
 
 router.route('/guandeng').post(function(req,res){
 
-		// operateSerialport(guandeng);	  
+		// operateSerialport(guandeng);
 	  saveInfo(req,'客厅','关灯');
  		console.log('\n' + '*****  ' + req.session.user.name + '关灯   ******' + '\n');
  		res.status(200).send('关灯ok');	//AJAX请求返回成功
