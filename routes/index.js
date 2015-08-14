@@ -9,65 +9,84 @@ var bodyParser = require('body-parser');
 
 
 
+var kaideng     = new Buffer('26535253000000000000000000004A000000000000000000000000000000002A','hex');//开继电器1（开灯）
+var guandeng    = new Buffer('26535253000000000000000000004A000100000000000000000000000000002A','hex');//关继电器1（关灯）
 
-var kaichuang  = new Buffer('265352530000000000000000000042000100000000000000000000000000002A','hex');//步进电机顺时针
-var guanchuang = new Buffer('265352530000000000000000000042010000000000000000000000000000002A','hex');//步进电机逆时针
-var kaideng    = new Buffer('26535253000000000000000000004A000000000000000000000000000000002A','hex');//开继电器1
-var guandeng   = new Buffer('26535253000000000000000000004A000100000000000000000000000000002A','hex');//关继电器1
+var kaichuang   = new Buffer('265352530000000000000000000042000100000000000000000000000000002A','hex');//步进电机顺时针转（开窗）
+var guanchuang  = new Buffer('265352530000000000000000000042010000000000000000000000000000002A','hex');//步进电机逆时针转（关窗）
+
+var kaideng2    = new Buffer('26535253000000000000000000004A010000000000000000000000000000002A','hex');//开继电器2
+var guandeng2   = new Buffer('26535253000000000000000000004A010100000000000000000000000000002A','hex');//关继电器2
+
+var shenghuo    = new Buffer('26535253000000000000000000005A000000000000000000000000000000002A','hex');//回家模式（开继电器1,2 步进顺）
+var anfang      = new Buffer('26535253000000000000000000005A010100000000000000000000000000002A','hex');//离家模式(关继电器1,2，步进逆)
+
+
+
+function saveInfo(req,housename,operate){
+  var Operate = global.dbHandel.getModel('operate');
+      Operate.create({
+          housename: housename,
+          username:  req.session.user.name,
+          operate: operate,
+          date: Date.now()
+        });
+        console.log('\n' + '*****  数据已保存  ******');
+	}	//svaeInofo
+
+
+function saveWSInfo(wendu,shidu){
+  var Wenshidu = global.dbHandel.getModel('wenshidu');
+      Wenshidu.create({
+          date: Date.now(),
+          temperature: wendu,
+          humidity:shidu
+        });
+        console.log('\n' + '*****  温湿度数据采集保存  ******');
+}
 
 
 
 
-// var yanwuGuan = new Buffer('434E410000000000000032','hex');//步进电机顺时针
-// var yanwuGuan = new Buffer('L11','utf-8');
-// var jdqKai = new Buffer("&SRS0000000000J0000000000000000*");
 
+//socket 客户端（连接远程服务器）
 var net = require('net');
-var HOST = '192.168.12.254';
-var PORT = 8080;
+var clientPro = new net.Socket();       //区分websoket，改名为clientPro
 
-var client = new net.Socket();
-
-client.connect(PORT, HOST, function() {
-    console.log('CONNECTED TO : ' + HOST + ':' + PORT);
-    // console.log("服务器连接远程服务器成功！");
-    // 建立连接后立即向服务器发送数据，服务器将收到这些数据
-    // client.write(yanwuGuan);
+clientPro.connect(8080,'192.168.11.254', function() {
+    console.log('Remote Socket clientPro Connetcted To : ' + "192.168.11.254" + ':' +" 8080");
 });
 
 // 为客户端添加“data”事件处理函数
 // data是服务器发回的数据
-client.on('data', function(data) {
-  console.log('收到数据: ' + data.toString());
+clientPro.on('data', function(data) {
+  var recivedata = data.toString();
+      console.log('收到数据: ' + recivedata);
 
-  var operate = data.toString();
-  // var wendu = operate.substring(7,9);
-  // var shidu = operate.substring(17,19);
+    if(recivedata[0]=='W'){
 
-    // if(operate[0]=='w'){
-    //   console.log('温度数据为: ' + wendu);
-    //   console.log('湿度数据为: ' + shidu);
-    // }
-
-    // console.log('收到硬件数据: ' + data.toString());
+      var wendu = recivedata.substring(6,9);
+      var shidu = recivedata.substring(12,15);
+      saveWSInfo(wendu,shidu);
+      console.log('温度数据为: ' + wendu);
+      console.log('湿度数据为: ' + shidu);
+    }
     // 完全关闭连接
-    // client.destroy();
-
+    // clientPro.destroy();
 });
 
-// client.write(yanwuGuan);
-
-
 // 为客户端添加“close”事件处理函数
-client.on('close', function() {
+clientPro.on('close', function() {
     console.log('Connection closed');
 });
 
-
-client.on('error', function (exception) {              //错误回调
+//错误回调
+clientPro.on('error', function (exception) {
     console.log('socket error:' + exception);
-    client.end();
+    clientPro.end();
 });
+
+
 
 
 
@@ -155,10 +174,6 @@ router.route("/register").get(function(req,res){    // 到达此路径则渲染r
 
 
 
-
-
-
-
 router.get("/home",function(req,res){
 	if(!req.session.user){ 					//到达/home路径首先判断是否已经登录
 		req.session.error = "请先登录"
@@ -170,56 +185,69 @@ router.get("/home",function(req,res){
 
 
 
-function saveInfo(req,housename,operate){
-  var Operate = global.dbHandel.getModel('operate');
-      Operate.create({
-          housename: housename,
-          username:  req.session.user.name,
-          operate: operate,
-          date: Date.now()
-        });
-        console.log('\n' + '*****  数据已保存  ******');
-	}	//svaeInofo
+
+
+
+  router.route('/anfang').post(function(req,res){
+  	 	clientPro.write(anfang);
+      saveInfo(req,'系统','安防模式');
+      console.log('\n' + '*****  ' + req.session.user.name + '安防   ******' + '\n');
+      res.status(200).send("安防ok");	//AJAX请求返回成功
+  });
+  router.route('/shenghuo').post(function(req,res){
+  	 	clientPro.write(shenghuo);
+      saveInfo(req,'系统','生活');
+      console.log('\n' + '*****  ' + req.session.user.name + '生活  ******' + '\n');
+      res.status(200).send("生活ok");	//AJAX请求返回成功
+  });
+  router.route('/xiuxi').post(function(req,res){
+  	 	clientPro.write(shenghuo);
+      saveInfo(req,'系统','休息');
+      console.log('\n' + '*****  ' + req.session.user.name + '休息   ******' + '\n');
+      res.status(200).send("休息ok");	//AJAX请求返回成功
+  });
+
+
+
+
+
+
 
 
 
 router.route('/kaichuang').post(function(req,res){
-	 	// operateSerialport(kaichuang);
+	 	clientPro.write(kaichuang);
     saveInfo(req,'卧室','开窗');
     console.log('\n' + '*****  ' + req.session.user.name + '开窗   ******' + '\n');
     res.status(200).send("开窗ok");	//AJAX请求返回成功
 });
 
 
-
 router.route('/guanchuang').post(function(req,res){
 
-	  // operateSerialport(guanchuang);
+	  clientPro.write(guanchuang);
     saveInfo(req,'卧室','关窗');
  		console.log('\n' + '*****  ' + req.session.user.name + '关窗   ******' + '\n');
  		res.status(200).send('关窗ok');	//AJAX请求返回成功
 });
 
 
-
 router.route('/kaideng').post(function(req,res){
 
-		// operateSerialport(kaidneg);
+		clientPro.write(kaideng);
     saveInfo(req,'客厅','开灯');
  	  console.log('\n' + '*****  ' + req.session.user.name + '开灯   ******' + '\n');
  	  res.status(200).send('开灯ok');	//AJAX请求返回成功
 });
 
 
-
 router.route('/guandeng').post(function(req,res){
 
-		// operateSerialport(guandeng);
+		clientPro.write(guandeng);
 	  saveInfo(req,'客厅','关灯');
  		console.log('\n' + '*****  ' + req.session.user.name + '关灯   ******' + '\n');
  		res.status(200).send('关灯ok');	//AJAX请求返回成功
 });
-
 
 
 router.get('/wenshidu', function(req, res) {
@@ -235,7 +263,7 @@ router.get('/guangzhao', function(req, res) {
 
 
   // 记录页面
-  router.get('/record', function(req, res,next) {
+router.get('/record', function(req, res,next) {
   var Operate = global.dbHandel.getModel('operate');
     	Operate.find({}).sort('-date').exec(function(err,doc){
     						if(err){

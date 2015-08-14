@@ -68,7 +68,6 @@ app.use("/kaichuang",routes);
 app.use("/guanchuang",routes);
 app.use("/kaideng",routes);
 app.use("/guandeng",routes);
-
 app.use("/gengduo",routes);
 
 app.use("/wenshidu",routes);
@@ -78,6 +77,10 @@ app.use('/home',routes); // 即为为路径 /home 设置路由
 app.use("/record",routes);
 app.use("/setting",routes);
 
+
+app.use('/anfang',routes);
+app.use('/shenghuo',routes);
+app.use('/xiuxi',routes);
 
 
 // catch 404 and forward to error handler

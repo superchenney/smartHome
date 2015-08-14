@@ -17,7 +17,7 @@
   <link rel="apple-touch-icon-precomposed" href="/img/app-icon72x72@2x.png">
   <meta name="msapplication-TileImage" content="/img/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  
+
   <!-- <link rel="stylesheet" href="/stylesheets/amazeui.min.css"/> -->
   <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css"/>
   <link rel="stylesheet" href="/stylesheets/admin.min.css">
@@ -25,7 +25,7 @@
 
 .am-header{
   background-color: #3AB4F3;
-  
+
 }
 
 .boxControl {
@@ -72,15 +72,17 @@
 }
 
 .feature-item{
+  display: block;
   margin: 0px;
   padding: 10px;
 /*  font-weight: bold;*/
 }
 
 
-.feature-item a span{
+.feature-item  span{
   display: block;
   color: #fff;
+
 }
 
 .instructions{
@@ -184,25 +186,20 @@
 <div class="feature" data-am-sticky>
   <ul class="am-avg-sm-3">
     <li class="feature-item" id="anfang">
-      <a href="">
       <span class="am-icon-lg am-icon-shield"></span>
       <span class="am-navbar-label">安防</span>
-      </a>
     </li>
 
     <li class="feature-item" id="shenghuo">
-      <a href="">
       <span class="am-icon-lg am-icon-bullseye"></span>
       <span class="am-navbar-label">生活</span>
-      </a>
     </li>
 
     <li class="feature-item" id="xiuxi">
-      <a href="">
       <span class="am-icon-lg am-icon-moon-o"></span>
       <span class="am-navbar-label">休息</span>
-      </a>
     </li>
+
   </ul>
 </div>
 
@@ -390,6 +387,72 @@ var username = {};
             console.log('ajax请求失败！'); }
       }); //ajax
     });   //关灯
+
+
+
+
+
+    $("#anfang").click(function(){
+      $('#anfang').addClass('am-animation-scale-up');  //淡出动画
+      $.ajax({
+        url: '/anfang',
+        type: 'POST',
+        datatype:'json',
+        success: function(data){
+          setTimeout("$('#anfang').removeClass('am-animation-scale-up')",500); //延时取消动画
+          if(data){
+            console.log('接收到的数据 data:' + data);
+          }else{
+            console.log('没有收到数据！')
+          }
+        },
+        error: function(data,err){
+            console.log('ajax请求失败！'); }
+      }); //ajax
+    });   //安防模式
+
+
+
+    $("#shenghuo").click(function(){
+      $('#shenghuo').addClass('am-animation-scale-up');  //淡出动画
+      $.ajax({
+        url: '/shenghuo',
+        type: 'POST',
+        datatype:'json',
+        success: function(data){
+          setTimeout("$('#shenghuo').removeClass('am-animation-scale-up')",500); //延时取消动画
+          if(data){
+            console.log('接收到的数据 data:' + data);
+          }else{
+            console.log('没有收到数据！')
+          }
+        },
+        error: function(data,err){
+            console.log('ajax请求失败！'); }
+      }); //ajax
+    });   //生活模式
+
+
+
+
+    $("#xiuxi").click(function(){
+      $('#xiuxi').addClass('am-animation-scale-up');  //淡出动画
+      $.ajax({
+        url: '/xiuxi',
+        type: 'POST',
+        datatype:'json',
+        success: function(data){
+          setTimeout("$('#xiuxi').removeClass('am-animation-scale-up')",500); //延时取消动画
+          if(data){
+            console.log('接收到的数据 data:' + data);
+          }else{
+            console.log('没有收到数据！')
+          }
+        },
+        error: function(data,err){
+            console.log('ajax请求失败！'); }
+      }); //ajax
+    });   //休息模式
 
 
 

@@ -24,16 +24,16 @@ module.exports = {
 	},//操作记录
 
 
-	wenShiDu:{
+	wenshidu:{
 		date:{
 			type:Date,
 			default:Date.now()
 		},
 		temperature:{
-			type:Number
+			type:String
 		},
 		humidity:{
-			type:Number
+			type:String
 		},
 	},	//温湿度
 
