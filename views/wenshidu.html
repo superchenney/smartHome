@@ -202,7 +202,7 @@ body {
         </div></div></div>
       <div class="inspired">
         <p>温度</p>
-        <h1>23  &#8451</h1>
+        <h1><%=item[0].temperature%>  &#8451</h1>
       </div>
 
 
@@ -244,7 +244,7 @@ id="">
 <script src="javascripts/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<!-- <script src="/javascripts/jquery.min.js"></script> -->
+<script src="/javascripts/jquery.min.js"></script>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <!--<![endif]-->
 <!-- <script src="/javascripts/amazeui.min.js"></script> -->
@@ -257,14 +257,17 @@ id="">
 <!-- ECharts单文件引入 -->
 <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 
-<script type="text/javascript">
-$(function(){
+<script>
+// $(function(){
+var title = '<%=title%>';
+    console.log(title);
 
 
-var wsddate = ['1号','2号','3号','4号','5号','6号','7号'];
+
+
+var wsddata = ['9:15:24','9:16','9:17','9:18','9:19','9:20','9:21'];
 var wendu = [23, 24, 30, 33, 25, 26.5, 30.6];
 var shidu = [43, 59, 90, 26, 28, 70, 76];
-
 
 
 // 路径配置
@@ -273,6 +276,9 @@ require.config({
         echarts: 'http://echarts.baidu.com/build/dist'
             }
       });
+
+
+
 // 使用
 require(
       [
@@ -281,11 +287,12 @@ require(
       ],
 function (ec) {
 // 基于准备好的dom，初始化echarts图表
+
 var myChart = ec.init(document.getElementById('main'));
 var option = {
         title : {
         // text: '温湿度情况',
-        subtext: '最近一周'
+        subtext: '最近10条记录'
     },
     tooltip : {
         trigger: 'axis'
@@ -301,7 +308,7 @@ var option = {
         {
             type : 'category',
             // data : ['1号','2号','3号','4号','5号','6号','7号']
-            data : wsddate
+            data : wsddata
         }
     ],
     yAxis : [
@@ -332,12 +339,6 @@ var option = {
             type:'bar',
             // data:[43, 59, 90, 26, 28, 70, 76],
             data: shidu,
-            // markPoint : {
-            //     data : [
-            //         {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
-            //         {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
-            //     ]
-            // },
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},
@@ -350,14 +351,14 @@ var option = {
                 ]
             }
         }
-    ]
+    ] //series
 };
   // 为echarts对象加载数据
     myChart.setOption(option);
             }
         );
 
-});
+// });
 </script>
 
 

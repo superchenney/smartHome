@@ -30,20 +30,20 @@ module.exports = {
 			default:Date.now()
 		},
 		temperature:{
-			type:String
+			type:Number
 		},
 		humidity:{
-			type:String
+			type:Number
 		},
 	},	//温湿度
 
-	guangZhao:{
+	guangzhao:{
 		date:{
 			type:Date,
 			default:Date.now()
 		},
 		illumination:{
-			type:Number
+			type:String
 		},
 	}
 

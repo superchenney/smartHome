@@ -42,7 +42,18 @@ function saveWSInfo(wendu,shidu){
           temperature: wendu,
           humidity:shidu
         });
-        console.log('\n' + '*****  温湿度数据采集保存  ******');
+        var dates = new Date();
+        console.log('\n' + '*****  '+ dates.toLocaleTimeString() +'温湿度数据采集保存  ******' +'\n');
+}
+
+function saveGZInfo(guangzhao){
+  var GuangZhao = global.dbHandel.getModel('guangzhao');
+      GuangZhao.create({
+          date: Date.now(),
+          illumination: guangzhao
+        });
+        var dates = new Date();
+        console.log('\n' + '*****  '+ dates.toLocaleTimeString() +'光照数据采集保存  ******' +'\n');
 }
 
 
@@ -64,25 +75,26 @@ clientPro.on('data', function(data) {
       console.log('收到数据: ' + recivedata);
 
     if(recivedata[0]=='W'){
-
-      var wendu = recivedata.substring(6,9);
-      var shidu = recivedata.substring(12,15);
-      saveWSInfo(wendu,shidu);
-      console.log('温度数据为: ' + wendu);
-      console.log('湿度数据为: ' + shidu);
+      var wendu = recivedata.substring(6,8);
+      var shidu = recivedata.substring(12,14);
+          saveWSInfo(wendu,shidu);
+          console.log('温度数据为: ' + wendu);
+          console.log('湿度数据为: ' + shidu);
     }
+
+
     // 完全关闭连接
     // clientPro.destroy();
 });
 
 // 为客户端添加“close”事件处理函数
 clientPro.on('close', function() {
-    console.log('Connection closed');
+    console.log('Socket Connection closed');
 });
 
 //错误回调
 clientPro.on('error', function (exception) {
-    console.log('socket error:' + exception);
+    console.log('Socket error:' + exception);
     clientPro.end();
 });
 
@@ -130,8 +142,9 @@ router.route("/login").get(function(req,res){    // 到达此路径则渲染logi
 			//	res.redirect("/login");
 			}else{ 									//信息匹配成功，则将此对象（匹配到的user) 赋给session.user  并返回成功
 				req.session.user = doc;
-				res.send(200);
-			//	res.redirect("/home");
+				res.sendStatus(200);
+        // res.send(200);
+				// res.redirect("/home");
 			}
 		}
 	});
@@ -196,13 +209,13 @@ router.get("/home",function(req,res){
   });
   router.route('/shenghuo').post(function(req,res){
   	 	clientPro.write(shenghuo);
-      saveInfo(req,'系统','生活');
+      saveInfo(req,'系统','生活模式');
       console.log('\n' + '*****  ' + req.session.user.name + '生活  ******' + '\n');
       res.status(200).send("生活ok");	//AJAX请求返回成功
   });
   router.route('/xiuxi').post(function(req,res){
   	 	clientPro.write(shenghuo);
-      saveInfo(req,'系统','休息');
+      saveInfo(req,'系统','休息模式');
       console.log('\n' + '*****  ' + req.session.user.name + '休息   ******' + '\n');
       res.status(200).send("休息ok");	//AJAX请求返回成功
   });
@@ -251,12 +264,23 @@ router.route('/guandeng').post(function(req,res){
 
 
 router.get('/wenshidu', function(req, res) {
-  res.render('wenshidu', { title: "温湿度" });    // 到达此路径则渲染index文件，并传出title值供 index.html使用
-});
+  var Wenshidu = global.dbHandel.getModel('wenshidu');
+    	Wenshidu.find({}).sort('-date').exec(function(err,doc){
+    						if(err){
+    							console.log(err);
+    						}else{
+    							console.log('记录 item : ' + doc);
+                  res.render('wenshidu', { title: "温湿度数据返回", item: doc });
+                };	//else
+    					});	//Wenshidu
+})
+
+
+
 
 
 router.get('/guangzhao', function(req, res) {
-  res.render('guangzhao', { title: '光照' });    // 到达此路径则渲染index文件，并传出title值供 index.html使用
+  res.render('guangzhao', { title: '光照' });
 });
 
 
