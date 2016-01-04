@@ -1,6 +1,6 @@
 # SmartHome智能家居
 
-标签（空格分隔）： nodejs javascript 
+标签： nodejs javascript 
 
 ---
 
