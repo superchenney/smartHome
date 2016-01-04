@@ -99,9 +99,7 @@ router.get('/', function(req, res, next) {
 
 /* GET login page. */
 router.route("/login").get(function(req, res) {
-    res.render("login", {
-        title: '用户登录'
-    });
+    res.render("login");
 }).post(function(req, res) {
     var User = global.dbHandel.getModel('user');
     var uname = req.body.uname;
@@ -123,7 +121,6 @@ router.route("/login").get(function(req, res) {
             } else {
                 req.session.user = doc;
                 res.sendStatus(200);
-                // res.send(200);
                 // res.redirect("/home");
             }
         }
